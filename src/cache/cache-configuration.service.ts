@@ -28,11 +28,20 @@ export class CacheConfigurationService implements CacheOptionsFactory {
     
 
     public createCacheOptions(): CacheModuleOptions {
-        return {
-            /*store: redisStore,
-            host: process.env.REDIS_HOST,
-            port: process.env.REDIS_PORT,*/
-            ttl: Number(process.env.CACHE_TTL),
+        const { REDIS_HOST, REDIS_PORT, CACHE_TTL } = process.env;
+
+        let options: CacheModuleOptions = {
+            ttl: Number(CACHE_TTL),
         }
+
+        if (REDIS_HOST) {
+            options = {
+                ...options,
+                store: redisStore,
+                port: REDIS_PORT,
+            }
+        }
+
+        return options;
     }
 }

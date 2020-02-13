@@ -2,18 +2,20 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
     name: nest-example
+    namespace: nest-example
 spec:
-    replicas: 2
+    replicas: 3
     selector:
         matchLabels:
-            app: nest
+            app: nest-example
     template:
         metadata:
             labels:
-                app: nest
+                app: nest-example
         spec:
             containers:
-                - name: nest
+                - name: nest-example
                   image: nohns/nest-example
+                  imagePullPolicy: Always
                   ports:
                     - containerPort: 3234
