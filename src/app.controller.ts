@@ -22,4 +22,10 @@ export class AppController {
     await this.appService.invalidateHello();
     return "Greeting has been reset back to the default...";
   }
+
+  @Get('env')
+  public getEnvVariables() {
+    const envJson = JSON.stringify(process.env, null, 2);
+    return `<pre>${envJson}</pre>`;
+  }
 }

@@ -18,4 +18,7 @@ spec:
                   image: nohns/nest-example
                   imagePullPolicy: Always
                   ports:
-                    - containerPort: 3234
+                      - containerPort: 3234
+                  env:
+                      - name: REDIS_HOST
+                        value: 10.108.126.13
